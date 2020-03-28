@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    app: myapp
+    type: front-end
+    
+spec:
+  # template 
+  template: 
+    # the pod definition (identical content to a pod definition yaml)
+    metadata:
+      name: myapp-pod
+      labels:
+        app: myapp
+        type: front-end
+
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+
+  # number of replicas of the pod definition
+  replicas: 3
+  # the selector key is the big differentiator between a replica controller and the replicaset
+  # t
+  selector:
+    matchLabels: 
+      type: front-end

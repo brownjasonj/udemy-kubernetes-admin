@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-replicaset
+  labels:
+    app: myapp
+    type: front-end
+
+spec:
+  # template of the pod in the replica set
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        app: myapp
+        type: front-end
+
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+  
+  replicas: 3
+  # the selector key is the big differentiator between a replica controller and the replicaset
+  # t
+  selector:
+    matchLabels: 
+      type: front-end
