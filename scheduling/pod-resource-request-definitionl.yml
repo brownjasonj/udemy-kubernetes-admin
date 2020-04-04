@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  labels:
+    name: myapp
+spec:
+  containers:
+  - name: myapp
+    image: nginx
+    resources:
+      requests:
+        # memory is specified using either K/M/G or Ki/Mi/Gi.  The latter being GigaByte (base 2)
+        memory: "32Mi"
+        cpu: "1m"
+      # the following is the maximum amount of resource the pod can consum on the node.  Without limit set, it is unlimited
+      limits:
+        memory: "128Mi"
+        # cpu specification 1 vCPU/Hyperthread == 1000m.  So 500m is 0.5 cpu.  Lower limit is 1m.
+        cpu: "500m"
+    ports:
+      - containerPort: 8080
