@@ -1,0 +1,30 @@
+# A daemon set is like a replica set except a daemon set ensures there is exactly
+# one copy of the pod running on each node of the cluster.  
+# This is useful for pods for monitoring or logging views etc.
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: myapp-daemonset
+  labels:
+    app: myapp
+    type: front-end
+
+spec:
+  # template of the pod in the daemon set
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        app: myapp
+        type: front-end
+
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+  
+  # the selector key is the big differentiator between a replica controller and the replicaset
+  # t
+  selector:
+    matchLabels: 
+      type: front-end
