@@ -1,0 +1,10 @@
+# example of a role that can only list nodes in a cluster
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: node-developer
+rules:
+- apiGroups: [""]
+  resources: ["nodes"]
+  verbs: ["list"]
